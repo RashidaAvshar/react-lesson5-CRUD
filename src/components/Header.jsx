@@ -12,7 +12,7 @@ function Header() {
                         <Link to="/table">Table</Link>
                         <Link to="/about">About</Link>
                         <Link to="/detail"></Link>
-
+                        <Link to="/modal"></Link>
                     </li>
                 </ul>
             </nav>

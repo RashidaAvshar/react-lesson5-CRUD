@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Table from "./pages/Table";
 import About from "./pages/About";
 import Detail from "./pages/Detail";
+import Modal from "./pages/Modalpage";
+import Modalpage from "./pages/Modalpage";
 
 
 function App() {
@@ -16,7 +18,7 @@ function App() {
         <Route path="/table" element={<Table/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/detail/:id" element={<Detail/>}/>
-
+        <Route path="/modalpage" element={<Modalpage/>}/>
       </Routes>
     </div>
   );

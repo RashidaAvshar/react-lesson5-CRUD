@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const columns = [
@@ -30,9 +31,28 @@ const Home = () => {
         })
     },[renderPage]);
 const deleteItem = (id) =>{
-    axios.delete(`https://fakestoreapi.com/products/${id}`).then((res)=>{
-        setRenderPage(!res.renderPage)
-    })
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            axios.delete(`https://fakestoreapi.com/products/${id}`).then((res)=>{
+        // setRenderPage(!res.renderPage)
+        console.log(res)
+    });
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+
+    
 }
 
 
@@ -54,4 +74,4 @@ const deleteItem = (id) =>{
   )
 }
 
-export default Home
+export default Home;
