@@ -24,7 +24,7 @@ const columns = [
 const Home = () => {
     const [data, setData] = useState([])
     const navigate = useNavigate();
-    const [renderPage, setRenderPage] = useState(true)
+    const [renderPage, setRenderPage] = useState(false)
     useEffect(()=>{
         axios.get("https://fakestoreapi.com/products").then((res)=>{
             setData(res.data)
@@ -51,13 +51,36 @@ const deleteItem = (id) =>{
           swal("Your imaginary file is safe!");
         }
       });
-
     
 }
 
+// const onHandleSearch = (e)=>{
+//     const newData = data.filter((item)=>
+//         item.category
+//         .toLocalLowerCase()
+//         .includes(e.target.value.toLocalLowerCase())
+//     )
+//     setData(newData)
+// }
+
+const onHandleSearch = (e) =>{
+    if(e.target.value.length >0){
+        const newData = data.filter(item=>{
+            item.category.toLowerCase().includes(e.target.value.toLowerCase()) || item.price.toString().includes(e.target.value)
+        })
+        setData(newData)
+    } else {
+        setRenderPage(!renderPage)
+
+    }
+   
+}
 
   return (
     <div className='container'>
+        <div className='search'>
+            <input type="text" onChange={onHandleSearch} />
+        </div>
        <div style={{ height: 400, width: '100%', marginTop: 30}}>
       <DataGrid
         rows={data}
