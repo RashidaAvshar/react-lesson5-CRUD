@@ -20,15 +20,16 @@ const columns = [
 ]
 
 
-
 const Home = () => {
     const [data, setData] = useState([])
+    const [mainData, setMainData] = useState([])
     const navigate = useNavigate();
     const [renderPage, setRenderPage] = useState(false)
     useEffect(()=>{
-        axios.get("https://fakestoreapi.com/products").then((res)=>{
-            setData(res.data)
-        })
+        axios.get("https://fakestoreapi.com/products")
+        // .then(res=>{setMainData(res.data)})
+        // .then(res=>{setData(mainData)})
+        .then((res)=>{ setData(res.data)})
     },[renderPage]);
 const deleteItem = (id) =>{
     swal({
@@ -54,24 +55,28 @@ const deleteItem = (id) =>{
     
 }
 
-// const onHandleSearch = (e)=>{
-//     const newData = data.filter((item)=>
-//         item.category
-//         .toLocalLowerCase()
-//         .includes(e.target.value.toLocalLowerCase())
-//     )
-//     setData(newData)
-// }
+
+// arrow functionda netice qayitmalidisa burug moterzieynen yazanda return sozu mutleq yazilmalidi, adi moterizeynen yazilmamalidi
+// sen burug moterize qoymusdun, amma return yazmamisdin
+// eger netice qayitmiyacagsa, basqa bir is gorecekse, meselen consola nese yazdirma, setData(nese eliyeceksense
+//  o halda her iki hal istifade olunanda return olmur men bileni)
+// hmm reqemi sildin, yazaram.. bir de baxim bunlara, tesekkur yene de xecalet oldum))
+// ne reqem, hec gormedim ki( xecalet zad olma, o ne sozdu, oyrenme yolunda ireliliyirik hamimiz nese olsa yazacam sabah))
+// reqem burda silindi?
+// buna geri silim ucun de usul tapdim , cox da keyfiyyetli deyil, istesen elave ederik commentle yazarsan baxaram yoxlayaram
+// 82de data mainData evezlemesi, 31-32 comentden cixarilir, 33 comentlenir
+// qaytardim, arasdirib evezliyersen istesn yeni arasdir deyisikliklerin neden ibaret oldugunu, casdirmasin seni
+
 
 const onHandleSearch = (e) =>{
     if(e.target.value.length >0){
-        const newData = data.filter(item=>{
-            item.category.toLowerCase().includes(e.target.value.toLowerCase()) || item.price.toString().includes(e.target.value)
-        })
+        const newData = data.filter(item=>(
+            item.title.toLowerCase().includes(e.target.value.toLowerCase())||item.category.toLowerCase().includes(e.target.value.toLowerCase())||item.price.toString().includes(e.target.value)
+        ))
         setData(newData)
+    
     } else {
         setRenderPage(!renderPage)
-
     }
    
 }
