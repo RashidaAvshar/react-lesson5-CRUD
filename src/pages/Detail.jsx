@@ -24,7 +24,7 @@ const Detail = () => {
       <h3>{category}</h3>
       <h2>{price} $</h2>
       </div>
-      <button onClick={()=>navigate("/")}>BACK</button>
+      <button className='detailBut' onClick={()=>navigate("/")}>BACK</button>
     </div>
   )
 }
